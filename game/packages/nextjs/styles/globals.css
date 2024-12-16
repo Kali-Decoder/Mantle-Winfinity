@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Bokor&family=Cinzel:wght@400..900&family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Ga+Maamli&family=Quicksand:wght@300..700&family=Rubik+Glitch&display=swap');
+
+
+body {
+    font-family: "Cinzel", serif;
+}
