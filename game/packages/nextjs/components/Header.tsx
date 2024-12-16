@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; // For burger and close icons
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+// For burger and close icons
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useUserBalance } from "~~/context/UserBalanceContext";
 
@@ -19,15 +20,13 @@ export const Header = () => {
 
   const handleAddMoney = async (amount: number) => {
     await stakeAmount(amount);
-    setDeposit((prevDeposit) => prevDeposit + amount);
-    setStake((prevStake) => prevStake + amount);
+    setDeposit(prevDeposit => prevDeposit + amount);
+    setStake(prevStake => prevStake + amount);
     setShowAddDropdown(false);
   };
 
   const pathname = usePathname();
-  const isGamePage = ["snake-game", "flappy-bird", "pin-needle", "pinball"].some((game) =>
-    pathname.includes(game)
-  );
+  const isGamePage = ["snake-game", "flappy-bird", "pin-needle", "pinball"].some(game => pathname.includes(game));
 
   // Define navigation items
   const navItems = [
@@ -50,7 +49,7 @@ export const Header = () => {
             <button
               type="button"
               className="btn btn-ghost p-2"
-              onClick={() => setIsDrawerOpen((prev) => !prev)}
+              onClick={() => setIsDrawerOpen(prev => !prev)}
               aria-label="Toggle navigation menu"
               aria-expanded={isDrawerOpen}
               aria-controls="mobile-menu"
@@ -68,7 +67,7 @@ export const Header = () => {
                 id="mobile-menu"
                 className="menu menu-compact dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-52 dark:bg-neutral dark:text-base-content absolute left-0 top-full z-50"
               >
-                {allNavItems.map((item) => (
+                {allNavItems.map(item => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -85,33 +84,22 @@ export const Header = () => {
 
           {/* Logo */}
           <div className="ml-2">
-            <Link href="/" className="flex items-center justify-center h-10 w-10 text-xl font-bold uppercase hidden sm:block">
-              Winfinity
+            <Link
+              href="/"
+              className=" mt-3 w-40 text-xl font-bold font-sans uppercase hidden sm:block"
+            >
+              WINFINITY
             </Link>
           </div>
         </div>
 
-        {/* Navbar Center: Only "Home" on Large Screens */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link
-                href="/"
-                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary transition-colors "
-              >
-                Home
-              </Link>
-            </li>
-          </ul>
-        </div>
-
         {/* Navbar Center: Conditionally show Add button on specific game pages (only on small screens) */}
-        <div className="navbar-center flex lg:hidden">
+        <div className="navbar-center flex ">
           {isGamePage && (
-            <div className="flex items-center bg-gray-800 text-white px-2 py-1 rounded-md gap-2 relative">
-              <span className="text-sm font-medium">${total.toFixed(2)}</span>
+            <div className="flex items-center mx-1 bg-gray-800 text-white px-2 py-1 rounded-md gap-2 relative">
+              <span className="text-sm font-bold mx-1">${total.toFixed(2)}</span>
               <button
-                onClick={() => setShowAddDropdown((prev) => !prev)}
+                onClick={() => setShowAddDropdown(prev => !prev)}
                 className="btn btn-sm btn-primary"
                 aria-haspopup="true"
                 aria-expanded={showAddDropdown}
@@ -119,8 +107,16 @@ export const Header = () => {
               >
                 Add
               </button>
+              <button
+                onClick={() => setShowAddDropdown(prev => !prev)}
+                className="btn-sm bg-yellow-200 text-black font-bold rounded-lg"
+                aria-haspopup="true"
+                aria-expanded={showAddDropdown}
+                aria-label="Add money"
+              >
+                Withdraw
+              </button>
 
-              {/* Add Money Dropdown */}
               {showAddDropdown && (
                 <div className="absolute top-full left-0 mt-2 bg-gray-700 text-white p-4 rounded-md shadow-lg z-50">
                   <p className="mb-2 text-sm font-semibold">Add money</p>
