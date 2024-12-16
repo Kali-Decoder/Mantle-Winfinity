@@ -11,5 +11,6 @@ Additionally, we plan to utilize the Ankr SDK to simplify the staking process, e
 
 
 ![PHOTO-2024-12-08-03-19-10](https://github.com/user-attachments/assets/59124558-8cbf-4997-af91-1c99bf189670)
+<br/>
 
 ![Winfinity Architecture](https://github.com/user-attachments/assets/efa614a7-06d5-468e-b119-1655e08caaee)
