@@ -10,6 +10,7 @@ import { useUserBalance } from "~~/context/UserBalanceContext";
 
 export const Header = () => {
   const { deposit, stakeAmount, setDeposit, setStake } = useUserBalance();
+  
   const total = deposit;
 
   // State for burger menu
