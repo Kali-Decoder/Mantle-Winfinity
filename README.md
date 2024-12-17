@@ -11,6 +11,13 @@ To enhance the user experience, the platform integrates with DEXs to stake user 
 
 Additionally, we plan to utilize the Ankr SDK to simplify the staking process, enabling users to effortlessly earn rewards in a more accessible and efficient way.
 
+<br/>
+
+#### Deployments 
+
+- https://sepolia.mantlescan.xyz/address/0xBCab4ba549886e6BEF67d9f3d381a2710316F8CA
+- https://explorer.sepolia.mantle.xyz/address/0x6D4E4b9cEb5A92F5212c017187528bCd0c516965
+
 <br/> <br/> <br/>
 ![ScreenRecording2024-12-17at2 13 41AM-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/7e3a9b74-d270-449e-94a7-d7103df457ed)
 <br/><br/>
