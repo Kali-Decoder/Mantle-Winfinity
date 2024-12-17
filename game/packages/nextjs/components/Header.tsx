@@ -9,8 +9,8 @@ import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaff
 import { useUserBalance } from "~~/context/UserBalanceContext";
 
 export const Header = () => {
-  const { deposit, stakeAmount, setDeposit, setStake,unstake } = useUserBalance();
-  
+  const { deposit, stakeAmount, setDeposit, setStake, unstake } = useUserBalance();
+
   const total = deposit;
 
   // State for burger menu
@@ -29,8 +29,8 @@ export const Header = () => {
 
   const handleWithdrawMoney = async (amount: number) => {
     await unstake(amount);
-    setDeposit(prevDeposit => prevDeposit + amount);
-    setStake(prevStake => prevStake + amount);
+    setDeposit(prevDeposit => prevDeposit - amount);
+    setStake(prevStake => prevStake - amount);
     setWithdrawDropdown(false);
   };
 
@@ -93,10 +93,7 @@ export const Header = () => {
 
           {/* Logo */}
           <div className="ml-2">
-            <Link
-              href="/"
-              className=" mt-3 w-40 text-xl font-bold font-sans uppercase hidden sm:block"
-            >
+            <Link href="/" className=" mt-3 w-40 text-xl font-bold font-sans uppercase hidden sm:block">
               WINFINITY
             </Link>
           </div>
@@ -147,6 +144,32 @@ export const Header = () => {
                       className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded"
                     >
                       +$20
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {withdrawDropdown && (
+                <div className="absolute top-full left-0 mt-2 bg-gray-700 text-white p-4 rounded-md shadow-lg z-50">
+                  <p className="mb-2 text-sm font-semibold">Withdraw money</p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleWithdrawMoney(10)}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-1 px-3 rounded"
+                    >
+                      -$10
+                    </button>
+                    <button
+                      onClick={() => handleWithdrawMoney(15)}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-1 px-3 rounded"
+                    >
+                      -$15
+                    </button>
+                    <button
+                      onClick={() => handleWithdrawMoney(20)}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-1 px-3 rounded"
+                    >
+                      -$20
                     </button>
                   </div>
                 </div>
