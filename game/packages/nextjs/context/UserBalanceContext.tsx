@@ -38,7 +38,6 @@ const UserBalanceContext = createContext<UserBalanceContextType>({
 export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
   const { address, chain } = useAccount();
   const [activeChain, setActiveChainId] = useState<number | undefined>(chain?.id);
-
   useEffect(() => {
     setActiveChainId(chain?.id);
   }, [chain?.id]);
@@ -120,6 +119,21 @@ export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const stakeReward = async () => {
+
+    try {
+      const mainContract = await getContractInstance(Addresses[activeChain]?.mainContractAddress, mainContractABI);
+      if (mainContract) {
+        const reward = await mainContract?.currentUserRewards(address);
+        setYieldAmount(ethers.utils.formatEther(reward));
+      }
+    } catch (error) {
+      console.log(error, "Error");
+      
+    }
+  };
+
+
   // Whenever stake changes, write it to localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -129,6 +143,7 @@ export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!signer) return;
+    stakeReward();
   }, [signer]);
 
   /**

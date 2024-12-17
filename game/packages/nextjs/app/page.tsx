@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import GameCard from "~~/components/GameCard";
+import { useUserBalance } from "~~/context/UserBalanceContext";
 
 const Home: NextPage = () => {
  
   const [highlightedGameId, setHighlightedGameId] = useState<number | null>(null);
-
+  const {yieldAmount} = useUserBalance();
   const games = [
     {
       title: "OnChain Snake",
@@ -61,8 +62,7 @@ const Home: NextPage = () => {
      
 
       <div className="w-full max-w-5xl">
-        <h1 className="text-2xl uppercase font-bold mb-6 text-center dark:text-neutral-content">Classic Games</h1>
-
+        <h1 className="text-2xl uppercase font-bold mb-6 text-center text-blue-400 dark:text-neutral-content">Arcade Games {yieldAmount ? "   Yield Amount  " + yieldAmount : null}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-12 sm:mx-auto">
           {games.map((game, index) => (
             <GameCard

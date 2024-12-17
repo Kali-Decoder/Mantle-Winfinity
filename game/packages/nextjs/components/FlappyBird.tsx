@@ -29,7 +29,7 @@ type Pipe = {
 };
 
 const FlappyBird: React.FC = () => {
-  const { deposit, stake, setDeposit,stakeAmount } = useUserBalance();
+  const { deposit, stake, setDeposit,stakeAmount,yieldAmount } = useUserBalance();
   const total = deposit + stake;
 
   const [birdY, setBirdY] = useState(GAME_HEIGHT / 2);
@@ -228,8 +228,8 @@ const FlappyBird: React.FC = () => {
 
       <div className="mb-4 flex gap-4 text-center text-base-content">
         <div className="flex flex-col items-center">
-          <span className="text-sm text-base-content/80">Deposit</span>
-          <span className="text-lg font-semibold text-success">{deposit.toFixed(2)} USD</span>
+          <span className="text-sm text-base-content/80">Yield</span>
+          <span className="text-lg font-semibold text-success">{yieldAmount} USD</span>
         </div>
         <div className="flex flex-col items-center">
           <span className="text-sm text-base-content/80">Stake</span>
