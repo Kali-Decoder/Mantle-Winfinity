@@ -93,7 +93,7 @@ export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
         }
       }
       if (mainContract) {
-        const tx = await mainContract?.deposit(amountEther,{from:address});
+        const tx = await mainContract?.stake(amountEther,{from:address});
         await tx.wait();
         toast.success("Deposit and Staked successfully", { id });
       }
