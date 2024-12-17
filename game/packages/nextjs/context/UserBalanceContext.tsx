@@ -19,6 +19,7 @@ interface UserBalanceContextType {
   finalizeStaking: () => void; // Finalize after 24 hours, distribute funds
   setYieldAmount: React.Dispatch<React.SetStateAction<number>>; // Set the yield amount after 24 hours
   stakeAmount: (amount:number) => void;
+  unstake: (amount:number) => void;
 }
 
 const UserBalanceContext = createContext<UserBalanceContextType>({
@@ -33,6 +34,7 @@ const UserBalanceContext = createContext<UserBalanceContextType>({
   finalizeStaking: () => {},
   setYieldAmount: () => {},
   stakeAmount: () => {},
+  unstake: () => {},
 });
 
 export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
@@ -104,14 +106,15 @@ export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
   };
 
 
-  const withdrawAmount = async () => {
-    let id = toast.loading("Withdrawing...");
+  const unstake = async (amount: number) => {
+    let id = toast.loading("Unstaking...");
     try {
+      let amountEther = ethers.utils.parseEther(amount.toString());
       const mainContract = await getContractInstance(Addresses[activeChain]?.mainContractAddress, mainContractABI);
       if (mainContract) {
-        const tx = await mainContract?.withdraw();
+        const tx = await mainContract?.unstake(amountEther);
         await tx.wait();
-        toast.success("Withdrawn successfully", { id });
+        toast.success("Unstake successfully", { id });
       }
     } catch (error) {
       console.log(error, "Error");
@@ -200,6 +203,7 @@ export const UserBalanceProvider = ({ children }: { children: ReactNode }) => {
         startStaking,
         finalizeStaking,
         stakeAmount,
+        unstake
       }}
     >
       {children}

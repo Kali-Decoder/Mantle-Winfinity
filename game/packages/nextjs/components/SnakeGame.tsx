@@ -19,7 +19,7 @@ const GRID_SIZE = 20;
 const SQUARE_SIZE = 20;
 
 const SnakeGame: React.FC = () => {
-  const { deposit, stake, setDeposit, stakeAmount,setStake } = useUserBalance();
+  const { deposit, stake, setDeposit, stakeAmount,setStake,yieldAmount } = useUserBalance();
 
   const total = deposit + stake;
   const [snake, setSnake] = useState<Position[]>([{ x: 5, y: 5 }]);
@@ -284,9 +284,9 @@ const SnakeGame: React.FC = () => {
       <h1 className="text-4xl font-bold mb-4 text-center text-primary">Snake Game</h1>
 
       <div className="mb-4 flex flex-wrap gap-4 justify-center text-center">
-        <div className="flex flex-col items-center">
-          <span className="text-sm text-gray-500">Deposit</span>
-          <span className="text-lg font-semibold text-green-500">{deposit.toFixed(2)} USD</span>
+      <div className="flex flex-col items-center">
+          <span className="text-sm text-base-content/80">Yield</span>
+          <span className="text-lg font-semibold text-success">{yieldAmount} USD</span>
         </div>
         <div className="flex flex-col items-center">
           <span className="text-sm text-gray-500">Stake</span>

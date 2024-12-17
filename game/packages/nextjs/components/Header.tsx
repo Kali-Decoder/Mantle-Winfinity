@@ -9,7 +9,7 @@ import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaff
 import { useUserBalance } from "~~/context/UserBalanceContext";
 
 export const Header = () => {
-  const { deposit, stakeAmount, setDeposit, setStake } = useUserBalance();
+  const { deposit, stakeAmount, setDeposit, setStake,unstake } = useUserBalance();
   
   const total = deposit;
 
@@ -18,12 +18,20 @@ export const Header = () => {
 
   // State for add money dropdown
   const [showAddDropdown, setShowAddDropdown] = useState(false);
+  const [withdrawDropdown, setWithdrawDropdown] = useState(false);
 
   const handleAddMoney = async (amount: number) => {
     await stakeAmount(amount);
     setDeposit(prevDeposit => prevDeposit + amount);
     setStake(prevStake => prevStake + amount);
     setShowAddDropdown(false);
+  };
+
+  const handleWithdrawMoney = async (amount: number) => {
+    await unstake(amount);
+    setDeposit(prevDeposit => prevDeposit + amount);
+    setStake(prevStake => prevStake + amount);
+    setWithdrawDropdown(false);
   };
 
   const pathname = usePathname();
@@ -109,10 +117,10 @@ export const Header = () => {
                 Add
               </button>
               <button
-                onClick={() => setShowAddDropdown(prev => !prev)}
+                onClick={() => setWithdrawDropdown(prev => !prev)}
                 className="btn-sm bg-yellow-200 text-black font-bold rounded-lg"
                 aria-haspopup="true"
-                aria-expanded={showAddDropdown}
+                aria-expanded={withdrawDropdown}
                 aria-label="Add money"
               >
                 Withdraw
